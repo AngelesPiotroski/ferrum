@@ -50,7 +50,7 @@ export default function AdminProductsPage() {
     try {
       const res = await fetch('/api/products?limit=100')
       const data = await res.json()
-      setProducts(data.products)
+      setProducts(data.products as Product[])
     } catch (error) {
       console.error('Error fetching products:', error)
     } finally {
@@ -119,7 +119,7 @@ export default function AdminProductsPage() {
       price: product.price.toString(),
       stock: product.stock.toString(),
       image: product.image || '',
-      images: product.images ? JSON.parse(product.images).join(', ') : '',
+      images: product['images'] ? JSON.parse(product['images'] as string).join(', ') : '',
       categoryId: product.categoryId || '',
       sku: product.sku || '',
       brand: product.brand || '',
