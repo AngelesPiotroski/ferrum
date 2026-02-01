@@ -113,15 +113,15 @@ export default function AdminProductsPage() {
 
   const handleEdit = (product: Product) => {
     setEditingProduct(product)
-    // Extraer images de forma segura
-    const productImages = product.images || null
+    // Usar type assertion para acceder a propiedades que pueden venir de la API
+    const productData = product as any
     setFormData({
       name: product.name,
       description: product.description || '',
       price: product.price.toString(),
       stock: product.stock.toString(),
       image: product.image || '',
-      images: productImages ? JSON.parse(productImages).join(', ') : '',
+      images: productData.images ? JSON.parse(productData.images).join(', ') : '',
       categoryId: product.categoryId || '',
       sku: product.sku || '',
       brand: product.brand || '',
