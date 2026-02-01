@@ -11,6 +11,10 @@ interface Product {
   price: number
   stock: number
   image?: string
+  images?: string
+  categoryId?: string
+  sku?: string
+  brand?: string
   category: {
     name: string
     slug: string
@@ -116,9 +120,9 @@ export default function AdminProductsPage() {
       stock: product.stock.toString(),
       image: product.image || '',
       images: product.images ? JSON.parse(product.images).join(', ') : '',
-      categoryId: (product as any).categoryId || '',
-      sku: (product as any).sku || '',
-      brand: (product as any).brand || '',
+      categoryId: product.categoryId || '',
+      sku: product.sku || '',
+      brand: product.brand || '',
     })
     setShowModal(true)
   }
