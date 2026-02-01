@@ -11,7 +11,7 @@ interface Product {
   price: number
   stock: number
   image?: string
-  images?: string
+  images?: string | null
   categoryId?: string
   sku?: string
   brand?: string
@@ -113,13 +113,15 @@ export default function AdminProductsPage() {
 
   const handleEdit = (product: Product) => {
     setEditingProduct(product)
+    // Extraer images de forma segura
+    const productImages = product.images || null
     setFormData({
       name: product.name,
       description: product.description || '',
       price: product.price.toString(),
       stock: product.stock.toString(),
       image: product.image || '',
-      images: product['images'] ? JSON.parse(product['images'] as string).join(', ') : '',
+      images: productImages ? JSON.parse(productImages).join(', ') : '',
       categoryId: product.categoryId || '',
       sku: product.sku || '',
       brand: product.brand || '',
